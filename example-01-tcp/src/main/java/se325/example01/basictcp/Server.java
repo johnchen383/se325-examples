@@ -10,14 +10,16 @@ import java.net.Socket;
 public class Server {
 
     public static void main(String[] args) {
+        //try with resources. can define port. port 0 means use some free port
         try (ServerSocket socket = new ServerSocket(0)) {
 
             InetAddress serverHost = InetAddress.getLocalHost();
             System.out.println("Server destination: " + serverHost.getHostAddress() + ":" + socket.getLocalPort());
 
-            /* Repeatedly handle requests for processing. */
+            /* Repeatedly handle requests for processing. Does not exit once one client is closed */
             while (true) {
 
+                //socket.accept() blocks until and returns Socket from client
                 try (Socket clientConnection = socket.accept()) {
                     DataInputStream in = new DataInputStream(clientConnection.getInputStream());
                     DataOutputStream out = new DataOutputStream(clientConnection.getOutputStream());
