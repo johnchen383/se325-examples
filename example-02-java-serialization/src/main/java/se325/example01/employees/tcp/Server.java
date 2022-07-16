@@ -32,6 +32,7 @@ public class Server {
                 try (Socket clientConnection = socket.accept()) {
                     System.out.println("Client connected!");
 
+                    //must set up ObjectInputStream first to match client setting up ObjectOutputStream first
                     ObjectInputStream in = new ObjectInputStream(clientConnection.getInputStream());
                     ObjectOutputStream out = new ObjectOutputStream(clientConnection.getOutputStream());
 
@@ -58,6 +59,7 @@ public class Server {
                         out.writeBoolean(false);
                     }
 
+                    //ensure all data is flushed to output stream before socket is closed
                     out.flush();
 
                 }

@@ -23,6 +23,7 @@ public class Client {
 
                 out.writeObject(new EmployeeRequest(empName));
 
+                //can also transfer primitives so object streams are built on top of data streams
                 boolean found = in.readBoolean();
 
                 if (found) {
